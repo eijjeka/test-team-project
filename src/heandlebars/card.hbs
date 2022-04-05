@@ -1,0 +1,8 @@
+{{#each this}}
+  <article class='card-movie'>
+    <img src='https://image.tmdb.org/t/p/original/{{poster_path}}' alt='card-movie__poster' />
+    <h2 class='card-movie__title'>{{original_title}}</h2>
+    <p class='card-movie__meta'>{{release_date}}</p>
+    <p class='card-movie__rating'>{{vote_average}}</p>
+  </article>
+{{/each}}
