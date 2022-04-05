@@ -1,21 +1,27 @@
 import './sass/main.scss';
 import debounce from 'lodash.debounce';
-import axios from 'axios';
 import apiService from './fetchApi';
 import compiledTemplate from './heandlebars/card.hbs';
 
 const refs = {
   input: document.querySelector('.input'),
   container: document.querySelector('.card-container'),
+  error: document.querySelector('.request__result'),
 };
 
 const newApiService = new apiService();
 
 function onInput(event) {
+  refs.error.style.opacity = 0;
+  let value = event.target.value.trim();
+  if (value === '') {
+    refs.error.style.opacity = 1;
+  }
+
   refs.container.innerHTML = '';
-  newApiService.searchName = event.target.value;
+  newApiService.searchName = value;
+
   newApiService.fetchArticles().then(({ results }) => {
-    console.log(results);
     refs.container.insertAdjacentHTML('beforeend', compiledTemplate(results));
   });
 }
